@@ -2,7 +2,7 @@
  * Created by: Akram Taghavi-Burris
  * Date Created: March 16, 2022
  * 
- * Last Edited by: NA
+ * Last Edited by: Qadeem Qureshi
  * Last Edited: March 16, 2022
  * 
  * Description: Enemy controler

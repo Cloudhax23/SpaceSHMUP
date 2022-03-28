@@ -2,7 +2,7 @@
  * Created by: Professor Akram
  * Date Created: March 16, 2022
  * 
- * Last Edited by: Camp Steiner
+ * Last Edited by: Qadeem Qureshi
  * Last Edited: March 21, 2022
  * 
  * Description: Hero ship controller
