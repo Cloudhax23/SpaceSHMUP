@@ -3,7 +3,7 @@
  * Date Created: March 16, 2022
  * 
  * Last Edited by: Qadeem Qureshi
- * Last Edited: March 16, 2022
+ * Last Edited: March 28, 2022
  * 
  * Description: Enemy controler
 ****/
@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // Move();
+        Move();
 
         //Check if bounds check exists and the object is off the bottom of the screne
         if(bndCheck != null && bndCheck.offDown)
@@ -60,4 +60,10 @@ public class Enemy : MonoBehaviour
 
     //Virtual methods can be overiden by child instances
 
+    public virtual void Move()
+    {
+        Vector3 tempPos = pos;
+        tempPos.y -= speed * Time.deltaTime;
+        pos = tempPos;
+    }
 }
