@@ -5,7 +5,7 @@
  * Last Edited by: Qadeem Qureshi
  * Last Edited: March 28, 2022
  * 
- * Description: Spawns enemies on screen
+ * Description: Spawns Enemies
 ****/
 
 using System.Collections;
@@ -14,38 +14,57 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Enemy Settings:")]
-    public GameObject[] prefabEnemies;
-    public float enemySpawnPerSecond;
-    public float enemyDefaultPadding;
+    [Header("Enemy Settings")]
+    public GameObject[] prefabEnemies; //prefabs for the enemies
+    public Stack<GameObject> prefabEnemiesS; //we love stacks
+    public float enemiesPerSecond; //enemies per second
+    public float enemyDefaultPadding; //padding between enemies positions
 
-    private BoundsCheck bndsCheck;
+    private BoundsCheck bndCheck;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        bndsCheck = GetComponent<BoundsCheck>();
-        Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
+        bndCheck = GetComponent<BoundsCheck>();
+        prefabEnemiesS = new Stack<GameObject>();
+        foreach(GameObject g in prefabEnemies)
+        {
+            prefabEnemiesS.Push(g);
+        }
+        InvokeRepeating("SpawnEnemy", 1f / enemiesPerSecond, 1f/enemiesPerSecond);
     }
 
-    void SpawnEnemy()
+    // Update is called once per frame
+    void Update()
     {
-        int idx = Random.Range(0, prefabEnemies.Length);
-        GameObject go = Instantiate(prefabEnemies[idx]);
+        
+    }
 
-        //Position enemy above the screen with random x pos
+    public void SpawnEnemy()
+    {
+        //we love stacks
 
-        float enemyPadding = go.GetComponent<BoundsCheck>() ? enemyDefaultPadding : Mathf.Abs(go.GetComponent<BoundsCheck>().radius);
+        int i = Random.Range(0, prefabEnemiesS.Count);
+        Stack<GameObject> tmp = new Stack<GameObject>();
+        for(int j = 0; j < i; j++)
+        {
+            tmp.Push(prefabEnemiesS.Pop());
+        }
+        GameObject go = Instantiate<GameObject>(prefabEnemiesS.Peek());
+        while (tmp.Count > 0) prefabEnemiesS.Push(tmp.Pop());
+
+        //if the enemy has padding, get it, else, use the default padding
+        float enemyPadding = go.GetComponent<BoundsCheck>() != null ? Mathf.Abs(go.GetComponent<BoundsCheck>().radius)  : enemyDefaultPadding;
 
         Vector3 pos = Vector3.zero;
-        float xMin = -bndsCheck.camWidth + enemyPadding;
-        float xMax = bndsCheck.camWidth - enemyPadding;
-
+        float xMin = -bndCheck.camWidth + enemyPadding;
+        float xMax =  bndCheck.camWidth - enemyPadding;
+        //spawn at a random x position at the top of the screen
         pos.x = Random.Range(xMin, xMax);
-        pos.y = bndsCheck.camHeight + enemyPadding;
+        pos.y = bndCheck.camHeight + enemyPadding;
 
         go.transform.position = pos;
-
-        Invoke("SpawnEnemy", 1f / enemySpawnPerSecond);
     }
 }

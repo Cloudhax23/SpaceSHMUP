@@ -5,20 +5,21 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Handled
+  - ProjectileHero
+  - ProjectileEnemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
+  - Player
   - Enemy
-  - Projectile Hero
-  - Projectile Enemy
+  - ProjectileHero
+  - ProjectileEnemy
   - PowerUp
   - PowerUpBox
-  - 
   - 
   - 
   - 
