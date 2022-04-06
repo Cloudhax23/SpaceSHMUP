@@ -1,3 +1,13 @@
+/****
+ *Created by: Qadeem Qureshi
+ *Date Created: March 28, 2022
+*
+*Last Edited by: Qadeem Qureshi
+ * Last Edited: April 06, 2022
+ *
+ *Description: Handles projectile off screen behavior
+****/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
