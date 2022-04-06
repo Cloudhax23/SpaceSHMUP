@@ -111,24 +111,19 @@ public class Hero : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TempFire();
+            Fire();
         }
 
     }//end Update()
 
-    public void TempFire()
+    public void Fire()
     {
-        GameObject proj = Instantiate<GameObject>(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         proj.GetComponent<Rigidbody>().velocity = Vector3.up * projectileSpeed;
     }
 
     //Taking Damage
     private void OnTriggerEnter(Collider other)
-    {
-        Ouchie(other);
-    }//end OnTriggerEnter()
-    
-    public void Ouchie(Collider other)
     {
         Transform rootT = other.gameObject.transform.root;
 
@@ -137,18 +132,13 @@ public class Hero : MonoBehaviour
         //make sure the same enemy cannot damage you twice
         if (go == lastTriggerGo) return;
         lastTriggerGo = go;
-        if(go.tag == "Enemy")
-        { 
-            Debug.Log("ouch that's a " + other);
+        if (go.tag == "Enemy")
+        {
             shieldLevel -= 1;
             Destroy(go);
         }
-        else
-        {
-            Debug.Log("hello there little " + other);
-        }
-    }
-
+    }//end OnTriggerEnter()
+    
     public void AddToScore(int val)
     {
         gm.UpdateScore(val);

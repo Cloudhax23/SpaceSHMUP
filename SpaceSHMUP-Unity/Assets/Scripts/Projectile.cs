@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        bc = GetComponent<BoundsCheck>(); 
+        bc = GetComponent<BoundsCheck>();
     }
 
     // Update is called once per frame

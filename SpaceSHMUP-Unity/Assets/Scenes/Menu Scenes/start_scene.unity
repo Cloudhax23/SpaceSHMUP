@@ -172,8 +172,9 @@ MonoBehaviour:
   copyrightDate: Copyright 2022
   recordHighScore: 1
   defaultHighScore: 1000
-  numberOfLives: 3
-  resetLostLevel: 0
+  defaultsLives: 3
+  resetLostLevel: 1
+  gameResetDelay: 2
   defaultEndMessage: Game Over
   looseMessage: You Loose
   winMessage: You Win

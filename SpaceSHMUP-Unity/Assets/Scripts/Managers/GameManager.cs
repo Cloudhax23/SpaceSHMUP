@@ -151,10 +151,6 @@ public class GameManager : MonoBehaviour
 
         //check for game state changes
         CheckGameState();
-
-        //Outpot game state
-        Debug.Log("Game State " + gameState);
-
     }//end Update
 
 
