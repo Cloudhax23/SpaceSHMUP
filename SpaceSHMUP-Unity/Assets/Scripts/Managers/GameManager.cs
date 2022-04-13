@@ -2,8 +2,8 @@
  * Created by: Akram Taghavi-Burrs
  * Date Created: Feb 23, 2022
  * 
- * Last Edited by: NA
- * Last Edited: March 31, 2022
+ * Last Edited by: Qadeem Qureshi
+ * Last Edited: April 11, 2022
  * 
  * Description: Basic GameManager Template
 ****/
@@ -18,6 +18,9 @@ using UnityEngine.SceneManagement; //libraries for accessing scenes
 //Setting the enum outside the class allows for direct access by the enum (classes) name directly in other classes.
 public enum GameState { Title, Playing, BeatLevel, LostLevel, GameOver, Idle , Testing };
 //enum of game states (work like it's own class)
+
+//requires an audio source
+[RequireComponent(typeof(AudioSource))]
 
 public class GameManager : MonoBehaviour
 {
@@ -78,6 +81,10 @@ public class GameManager : MonoBehaviour
     public int Score { get { return score; } set { score = value; } }//access to static variable score [get/set methods]
 
     [Space(10)]
+    public AudioClip bgMusic; //sound clip for the background music
+    private AudioSource audioSource;
+    
+    [Space(10)]
     public string defaultEndMessage = "Game Over";//the end screen message, depends on winning outcome
     public string looseMessage = "You Loose"; //Message if player looses
     public string winMessage = "You Win"; //Message if player wins
@@ -137,6 +144,14 @@ public class GameManager : MonoBehaviour
     //Start is called once before the update
     void Start()
     {
+        if(bgMusic != null)
+        {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.volume = 0.5f;
+            audioSource.clip = bgMusic;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
         //if we run play the game from the level instead of start scene (PLAYTESTING ONLY)
         if (currentSceneName != startScene) { SetGameState(GameState.Testing); }//set the game state for testing }
 
@@ -151,6 +166,7 @@ public class GameManager : MonoBehaviour
 
         //check for game state changes
         CheckGameState();
+
     }//end Update
 
 

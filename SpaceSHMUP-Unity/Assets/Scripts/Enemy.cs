@@ -72,8 +72,8 @@ public class Enemy : MonoBehaviour
         if(o.tag == "ProjectileHero") //if a bullet touches the enemy
         {
             Hero.SHIP.AddToScore(score); //increase score
-            Destroy(o);
-            Destroy(gameObject); //destroy the projectile and the enemy
+            o.SetActive(false); //deactive the bullet
+            Destroy(gameObject); //destroy the enemy
         }
     }
 }
